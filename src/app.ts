@@ -4,7 +4,7 @@ const app = express();
 
 
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
-    res.redirect('https://twitch.tv/forsen')
+    res.redirect('https://youtu.be/d1YBv2mWll0')
 });
 
 app.listen('4000', () => {
