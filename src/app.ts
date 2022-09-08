@@ -18,6 +18,10 @@ app.get(`/kekw`, (req: Request, res: Response, next: NextFunction) => {
     res.render('kekw.ejs');
 });
 
+app.get('/kekw2', (req: Request, res: Response, next: NextFunction) => {
+    res.render('kekw2.ejs');
+});
+
 app.listen('4000', () => {
     console.log(`server is running on port 4000`);
 });
