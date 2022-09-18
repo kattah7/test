@@ -1,27 +1,32 @@
-import express, { Request, Response, NextFunction } from 'express';
-
+import express, { Request, Response, NextFunction } from "express";
+import http from "http";
+import { Server } from "socket.io";
 const app = express();
-app.use(express.static("src/public"));
+const server = http.createServer(app);
+const io = new Server(server);
 
-app.use("/css", express.static(__dirname + "public/css"));
-app.use("/js", express.static(__dirname + "public/js"));
-app.use("/img", express.static(__dirname + "public/img"));
+app.get("/", (req: Request, res: Response, next: NextFunction) => {
+  res.redirect("https://youtu.be/d1YBv2mWll0");
+});
 
-app.set("views", "./src/views");
-app.set("view engine", "ejs");
+app.get("/chat", (req, res) => {
+  res.sendFile(__dirname + "/views/chat.ejs");
+});
 
-app.get('/', (req: Request, res: Response, next: NextFunction) => {
-    res.redirect('https://youtu.be/d1YBv2mWll0')
+io.on("connection", (socket) => {
+  socket.on("chat message", (msg) => {
+    io.emit("chat message", msg);
+  });
 });
 
 app.get(`/kekw`, (req: Request, res: Response, next: NextFunction) => {
-    res.render('kekw.ejs');
+  res.render("kekw.ejs");
 });
 
-app.get('/kekw2', (req: Request, res: Response, next: NextFunction) => {
-    res.render('kekw2.ejs');
+app.get("/kekw2", (req: Request, res: Response, next: NextFunction) => {
+  res.render("kekw2.ejs");
 });
 
-app.listen('4000', () => {
-    console.log(`server is running on port 4000`);
+server.listen(4000, () => {
+  console.log("listening on 4000");
 });
