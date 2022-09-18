@@ -10,21 +10,13 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
 });
 
 app.get("/chat", (req, res) => {
-  res.sendFile(__dirname + "/views/chat.ejs");
+  res.render(__dirname + "/views/chat.ejs");
 });
 
 io.on("connection", (socket) => {
   socket.on("chat message", (msg) => {
     io.emit("chat message", msg);
   });
-});
-
-app.get(`/kekw`, (req: Request, res: Response, next: NextFunction) => {
-  res.render("kekw.ejs");
-});
-
-app.get("/kekw2", (req: Request, res: Response, next: NextFunction) => {
-  res.render("kekw2.ejs");
 });
 
 server.listen(4000, () => {
