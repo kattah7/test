@@ -9,15 +9,15 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.redirect("https://youtu.be/d1YBv2mWll0");
 });
 
-app.get("/chat", (req, res) => {
-  res.render(__dirname + "/views/chat.ejs");
-});
+// app.get("/chat", (req, res) => {
+//   res.render(__dirname + "/views/chat.ejs");
+// });
 
-io.on("connection", (socket) => {
-  socket.on("chat message", (msg) => {
-    io.emit("chat message", msg);
-  });
-});
+// io.on("connection", (socket) => {
+//   socket.on("chat message", (msg) => {
+//     io.emit("chat message", msg);
+//   });
+// });
 
 server.listen(4000, () => {
   console.log("listening on 4000");
